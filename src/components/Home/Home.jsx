@@ -6,7 +6,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get('https://api.themoviedb.org/3/trending/all/day', {
+      .get('https://api.themoviedb.org/3/trending/movie/day', {
         params: {
           api_key: '0faef55576804b8824855a6bbe4c2da0',
         },
