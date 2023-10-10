@@ -9,7 +9,7 @@ function Reviews({ match }) {
     axios
       .get(`/movies/get-movie-reviews/${movieId}`, {
         params: {
-          api_key: 'YOUR_API_KEY_HERE',
+          api_key: '0faef55576804b8824855a6bbe4c2da0',
         },
       })
       .then((response) => {
