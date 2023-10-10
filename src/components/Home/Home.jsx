@@ -6,13 +6,16 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get('/trending/get-trending', {
+      .get('https://api.themoviedb.org/3/trending/all/day', {
         params: {
-          api_key: 'YOUR_API_KEY_HERE',
+          api_key: '0faef55576804b8824855a6bbe4c2da0',
         },
       })
       .then((response) => {
         setPopularMovies(response.data.results);
+      })
+      .catch((error) => {
+        console.error('Помилка отримання популярних фільмів:', error);
       });
   }, []);
 

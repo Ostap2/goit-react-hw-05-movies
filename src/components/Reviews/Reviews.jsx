@@ -1,19 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
+const BASE_URL = 'https://api.themoviedb.org/3';
+const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
+
 function Reviews({ match }) {
   const [reviews, setReviews] = useState([]);
   const movieId = match.params.movieId;
 
   useEffect(() => {
     axios
-      .get(`/movies/get-movie-reviews/${movieId}`, {
+      .get(`${BASE_URL}/movie/${movieId}/reviews`, {
         params: {
-          api_key: '0faef55576804b8824855a6bbe4c2da0',
+          api_key: API_KEY,
         },
       })
       .then((response) => {
         setReviews(response.data.results);
+      })
+      .catch((error) => {
+        console.error('Помилка отримання оглядів фільму:', error);
       });
   }, [movieId]);
 

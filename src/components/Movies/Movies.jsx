@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+const BASE_URL = 'https://api.themoviedb.org/3';
+const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
+
 function Movies() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = () => {
     axios
-      .get('/search/search-movies', {
+      .get(`${BASE_URL}/search/movie`, {
         params: {
-          api_key: 'YOUR_API_KEY_HERE',
+          api_key: API_KEY,
           query: searchTerm,
         },
       })
       .then((response) => {
         setSearchResults(response.data.results);
+      })
+      .catch((error) => {
+        console.error('Помилка під час пошуку фільмів:', error);
+
       });
   };
 

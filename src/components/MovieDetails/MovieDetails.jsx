@@ -7,13 +7,16 @@ function MovieDetails({ match }) {
 
   useEffect(() => {
     axios
-      .get(`/movies/get-movie-details/${movieId}`, {
+      .get(`https://api.themoviedb.org/3/movie/${movieId}`, {
         params: {
-          api_key: 'YOUR_API_KEY_HERE',
+          api_key: '0faef55576804b8824855a6bbe4c2da0',
         },
       })
       .then((response) => {
         setMovieDetails(response.data);
+      })
+      .catch((error) => {
+        console.error('Помилка отримання деталей фільму:', error);
       });
   }, [movieId]);
 
