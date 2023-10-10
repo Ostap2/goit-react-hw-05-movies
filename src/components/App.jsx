@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('./Home/Home'));
 const Movies = lazy(() => import('./Movies/Movies'));
@@ -9,19 +9,17 @@ const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Suspense fallback={<div>Завантаження...</div>}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/movies/:movieId" element={<MovieDetails />} />
-            <Route path="/movies/:movieId/cast" element={<Cast />} />
-            <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-          </Routes>
-        </Suspense>
-      </div>
-    </Router>
+    <div>
+      <Suspense fallback={<div>Завантаження...</div>}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />} />
+          <Route path="/movies/:movieId/cast" element={<Cast />} />
+          <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+        </Routes>
+      </Suspense>
+    </div>
   );
 }
 
