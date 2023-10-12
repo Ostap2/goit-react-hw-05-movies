@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+const Header = lazy(() => import('./Header/Header'));
 const Home = lazy(() => import('./Home/Home'));
 const Movies = lazy(() => import('./Movies/Movies'));
 const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
@@ -10,9 +11,10 @@ const Reviews = lazy(() => import('./Reviews/Reviews'));
 function App() {
   return (
     <div>
-      <Suspense fallback={<div>Завантаження...</div>}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="/movies" element={<Movies />} />
           <Route path="/movies/:movieId" element={<MovieDetails />} />
           <Route path="/movies/:movieId/cast" element={<Cast />} />

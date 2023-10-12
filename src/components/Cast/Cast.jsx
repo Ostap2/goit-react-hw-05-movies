@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const BASE_URL = 'https://api.themoviedb.org/3';
+const BASE_URL = 'https://api.themoviedb.org/3/movie/{movie_id}/credits';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
 
 function Reviews({ match }) {

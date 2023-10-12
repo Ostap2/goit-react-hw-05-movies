@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const BASE_URL = 'https://api.themoviedb.org/3';
+const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
 
 function Movies() {
@@ -10,7 +10,7 @@ function Movies() {
 
   const handleSearch = () => {
     axios
-      .get(`${BASE_URL}/search/movie`, {
+      .get(BASE_URL, {
         params: {
           api_key: API_KEY,
           query: searchTerm,
@@ -21,7 +21,6 @@ function Movies() {
       })
       .catch((error) => {
         console.error('Помилка під час пошуку фільмів:', error);
-
       });
   };
 
@@ -30,14 +29,18 @@ function Movies() {
       <h1>Пошук фільмів</h1>
       <input
         type="text"
-        placeholder="Введіть ключове слово"
+        placeholder="
+        Enter a keyword"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button onClick={handleSearch}>Пошук</button>
-      <ul>
+      <button onClick={handleSearch} className='button-search'>
+Search</button>
+      <ul className='list-films'>
         {searchResults.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
+          <li key={movie.id} className='item-films'>
+          <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} className='img-films' />
+            {movie.title}</li>
         ))}
       </ul>
     </div>

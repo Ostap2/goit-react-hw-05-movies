@@ -6,7 +6,7 @@ function Home() {
 
   useEffect(() => {
     axios
-      .get('https://api.themoviedb.org/3/trending/movie/day', {
+      .get('https://api.themoviedb.org/3/trending/movie/day?language=en-US', {
         params: {
           api_key: '0faef55576804b8824855a6bbe4c2da0',
         },
@@ -22,9 +22,12 @@ function Home() {
   return (
     <div>
       <h1>Популярні фільми</h1>
-      <ul>
+      <ul className='list-films'>
         {popularMovies.map((movie) => (
-          <li key={movie.id}>{movie.title}</li>
+          <li key={movie.id} className='item-films'>
+            <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} className='img-films' />
+            {movie.title}
+          </li>
         ))}
       </ul>
     </div>

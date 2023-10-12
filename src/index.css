@@ -1,4 +1,4 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
 
 body {
   margin: 0;
@@ -7,9 +7,99 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 0 5px 5px 5px ;
+  background-color: black;
+  color: white;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+ul {
+  list-style: none
+}
+a {
+  text-decoration: none;
+  width: 100%;
+}
+.header {
+  background-color: black;
+  border:3px solid #474748;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  height: 65px;
+  transition: 1s;
+}
+
+.list {
+  width: 100%;
+  margin-right: 10px;
+  padding: 0; 
+  display: flex;
+  transition: 1s;
+}
+.item-nav {
+ margin-right: 80px;
+ color: orange;
+ transition: 1s;
+border-bottom: solid 1px orange;
+padding: 3px;
+width: 100px;
+}
+.link-nav {
+  color: orange;
+  width: 100px;
+  height: 100%;
+}
+.item-nav:hover {
+  border: solid 1px orange;
+  border-radius: 20px;
+  padding: 6px;
+  text-align: center;
+    transition: 1s;
+}
+.list-films {
+  display: flex; 
+  flex-wrap: wrap;
+}
+.item-films {
+  width: 20%;
+  margin-bottom: 30px;
+}
+.img-films {
+  margin-bottom: 10px;
+}
+h1 {
+  color: orange;
+}
+li {
+  color: orange;
+}
+input {
+  background-color: transparent;
+  border: solid 1px orange;
+  border-radius: 20px;
+  width: 290px;
+  height: 30px;
+  padding: 5px;
+  color: orange;
+}
+.button-search {
+  background-color: black;
+  color: orange;
+  border: solid 1px orange;
+  border-radius: 20px;
+  width: 100px;
+  height: 25px;
+  transition: 1s;
+  margin-left: 14px;
+}
+.button-search:hover {
+  width: 110px;
+  height: 35px;
+  transition: 1s;
 }

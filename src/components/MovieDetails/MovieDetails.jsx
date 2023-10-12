@@ -7,7 +7,7 @@ function MovieDetails({ match }) {
 
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+      .get(`https://api.themoviedb.org/3/movie/{movie_id}`, {
         params: {
           api_key: '0faef55576804b8824855a6bbe4c2da0',
         },
