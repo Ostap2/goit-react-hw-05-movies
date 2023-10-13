@@ -25,11 +25,14 @@ function Reviews({ match }) {
 
   return (
     <div>
-      <h2>Огляди</h2>
+      <h2>Cast</h2>
       <ul>
         {reviews.map((review) => (
-          <li key={review.id}>
-            <p>{review.author}</p>
+          <li key={review.id} className=''>
+            <p>
+              <img src={`https://image.tmdb.org/t/p/w200/${review.author_details.avatar_path}`} alt={review.author} className="author-photo" />
+              {review.author}
+            </p>
             <p>{review.content}</p>
           </li>
         ))}

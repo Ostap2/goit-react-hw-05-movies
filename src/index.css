@@ -22,6 +22,7 @@ ul {
 a {
   text-decoration: none;
   width: 100%;
+  color: orange;
 }
 .header {
   background-color: black;
@@ -63,12 +64,16 @@ width: 100px;
     transition: 1s;
 }
 .list-films {
-  display: flex; 
-  flex-wrap: wrap;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, 200px);
+  gap: 20px;
 }
 .item-films {
-  width: 20%;
-  margin-bottom: 30px;
+  border: 1px solid orange; 
+  text-align: center;
+  width: 200px;
+  height: 390px;
 }
 .img-films {
   margin-bottom: 10px;
@@ -102,4 +107,129 @@ input {
   width: 110px;
   height: 35px;
   transition: 1s;
+}
+.img-det {
+  width: 350x;
+  height: 400px;
+}
+p {
+  color: orange;
+}
+.descri {
+  width: 500px;
+  position: absolute;
+  margin-left: 300px;
+  top: 150px;
+}
+.button-load-cast {
+  background-color: black;
+  color: orange;
+  border: solid 1px orange;
+  border-radius: 20px;
+  width: 120px;
+  height: 35px;
+  transition: 1s;
+  margin-left: 14px;
+  margin-right: 40px;
+}
+.button-load-Reviews {
+  background-color: black;
+  color: orange;
+  border: solid 1px orange;
+  border-radius: 20px;
+  width: 160px;
+  height: 35px;
+  transition: 1s;
+  margin-left: 14px;
+}
+.p-rating {
+  width: 500px;
+  position: absolute;
+  margin-left: 300px;
+  top: 350px;
+}
+.button-clear-cast {
+  background-color: black;
+  color: orange;
+  border: solid 1px orange;
+  border-radius: 20px;
+  width: 120px;
+  height: 35px;
+  transition: 1s;
+  margin-left: 14px;
+  margin-right: 40px;
+  margin-top: 20px;
+}
+.button-clear-Reviews {
+  background-color: black;
+  color: orange;
+  border: solid 1px orange;
+  border-radius: 20px;
+  width: 160px;
+  height: 35px;
+  transition: 1s;
+  margin-left: 14px;
+  margin-top: 20px;
+}
+.li-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 1s;
+}
+.ul-button {
+  display: flex; 
+  flex-wrap: nowrap;
+  list-style: none; 
+  align-items: center;
+  padding: 0; 
+  border: solid 1px orange;
+  height: 150px;
+  width: 400px;
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 15px;
+  transition: 1s;
+}
+h2 {
+  color: orange;
+}
+.ul-actor {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, 200px);
+  gap: 20px;
+}
+.li-actor {
+  border: 1px solid orange; 
+  text-align: center;
+  width: 200px;
+  height: 400px;
+}
+.actor-photo {
+ width: 100%;
+ height: 270px;
+}
+.p-actor {
+  margin-top: 20px;
+}
+.ul-reviews {
+  width: 900px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 20px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.li-reviews {
+  margin-bottom: 20px;
+  text-align: center;
+
+}
+.container-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

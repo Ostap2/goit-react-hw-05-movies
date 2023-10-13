@@ -25,7 +25,7 @@ function Reviews({ match }) {
 
   return (
     <div>
-      <h2>Огляди</h2>
+      <h2>Revievs</h2>
       <ul>
         {reviews.map((review) => (
           <li key={review.id}>

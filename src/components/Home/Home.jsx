@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 
 function Home() {
   const [popularMovies, setPopularMovies] = useState([]);
@@ -20,16 +22,19 @@ function Home() {
   }, []);
 
   return (
-    <div>
+    <div className='container-center'>
       <h1>Популярні фільми</h1>
       <ul className='list-films'>
-        {popularMovies.map((movie) => (
-          <li key={movie.id} className='item-films'>
-            <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} className='img-films' />
-            {movie.title}
-          </li>
-        ))}
-      </ul>
+  {popularMovies.map((movie) => (
+    <li key={movie.id} className='item-films'>
+      <Link to={`/movies/${movie.id}`}>
+        <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} className='img-films' />
+        {movie.title}
+      </Link>
+    </li>
+  ))}
+</ul>
+
     </div>
   );
 }
