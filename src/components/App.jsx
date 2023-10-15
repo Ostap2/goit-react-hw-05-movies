@@ -1,6 +1,5 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Link } from 'react-router-dom'; 
 
 const Header = lazy(() => import('./Header/Header'));
 const Home = lazy(() => import('./Home/Home'));
