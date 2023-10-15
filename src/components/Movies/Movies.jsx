@@ -26,21 +26,31 @@ function Movies() {
 
   return (
     <div>
-      <h1>Пошук фільмів</h1>
+      <h1>Search movies</h1>
       <input
-        type="text"
-        placeholder="
-        Enter a keyword"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
-      <button onClick={handleSearch} className='button-search'>
-Search</button>
-      <ul className='list-films'>
+  type="text"
+  id="searchInput" 
+  name="searchInput" 
+  placeholder="Enter a keyword"
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+/>
+
+      <button onClick={handleSearch} className="button-search">
+      Search
+      </button>
+      <ul className="list-films">
         {searchResults.map((movie) => (
-          <li key={movie.id} className='item-films'>
-          <img src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`} alt={movie.title} className='img-films' />
-            {movie.title}</li>
+          <li key={movie.id} className="item-films">
+            {movie.poster_path && (
+              <img
+                src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                alt={movie.title}
+                className="img-films"
+              />
+            )}
+            {movie.title}
+          </li>
         ))}
       </ul>
     </div>

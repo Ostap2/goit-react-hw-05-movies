@@ -12,14 +12,22 @@ function App() {
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
-        <Header />
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/movies/:movieId" element={<MovieDetails />} />
-
-          <Route path="/movies/:movieId/cast" element={<Cast />} />
-          <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+          <Route
+            path="/*"
+            element={
+              <div>
+                <Header />
+                <Routes>
+                  <Route index element={<Home />} />
+                  <Route path="/movies" element={<Movies />} />
+                  <Route path="/movies/:movieId" element={<MovieDetails />} />
+                  <Route path="/movies/:movieId/cast" element={<Cast />} />
+                  <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+                </Routes>
+              </div>
+            }
+          />
         </Routes>
       </Suspense>
     </div>
