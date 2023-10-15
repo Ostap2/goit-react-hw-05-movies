@@ -12,7 +12,7 @@ function Reviews() {
   const [movieImage, setMovieImage] = useState('');
 
   useEffect(() => {
-    // Отримуємо інформацію про огляди фільму
+
     axios
       .get(`${BASE_URL}/${movieId}/reviews`, {
         params: {
@@ -26,7 +26,6 @@ function Reviews() {
         console.error('Помилка отримання оглядів фільму:', error);
       });
 
-    // Отримуємо інформацію про фільм для відображення деталей
     axios
       .get(`${BASE_URL}/${movieId}`, {
         params: {

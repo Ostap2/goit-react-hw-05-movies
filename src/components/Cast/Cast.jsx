@@ -13,7 +13,7 @@ function Cast() {
   const [movieImage, setMovieImage] = useState('');
 
   useEffect(() => {
-    // Отримуємо інформацію про акторів (каст)
+
     axios
       .get(`${BASE_URL}/${movieId}/credits`, {
         params: {
@@ -27,7 +27,6 @@ function Cast() {
         console.error('Помилка отримання інформації про акторів:', error);
       });
 
-    // Отримуємо інформацію про фільм для відображення деталей
     axios
       .get(`${BASE_URL}/${movieId}`, {
         params: {
