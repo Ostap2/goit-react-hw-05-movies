@@ -10,19 +10,20 @@ const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 function App() {
   return (
-    <BrowserRouter> 
-      <div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Header />
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/movies/:movieId" element={<MovieDetails />} />
-            <Route path="/movies/:movieId/cast" element={<Cast />} />
-            <Route path="/movies/:movieId/reviews" element={<Reviews />} />
-          </Routes>
-        </Suspense>
-      </div>
+    <BrowserRouter>
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Header />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />} />
+
+          <Route path="/movies/:movieId/cast" element={<Cast />} />
+          <Route path="/movies/:movieId/reviews" element={<Reviews />} />
+        </Routes>
+      </Suspense>
+    </div>
     </BrowserRouter>
   );
 }
