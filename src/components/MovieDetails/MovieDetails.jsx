@@ -9,8 +9,6 @@ function MovieDetails() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const [movieImage, setMovieImage] = useState('');
-  const [cast, setCast] = useState([]);
-  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     axios
