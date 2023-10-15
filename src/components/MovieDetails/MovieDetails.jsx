@@ -42,35 +42,6 @@ function MovieDetails() {
       });
   }, [movieId]);
 
-  const loadCast = () => {
-    axios
-      .get(`${BASE_URL}/${movieId}/credits`, {
-        params: {
-          api_key: API_KEY,
-        },
-      })
-      .then((response) => {
-        setCast(response.data.cast);
-      })
-      .catch((error) => {
-        console.error('Помилка отримання інформації про акторів:', error);
-      });
-  };
-
-  const loadReviews = () => {
-    axios
-      .get(`${BASE_URL}/${movieId}/reviews`, {
-        params: {
-          api_key: API_KEY,
-        },
-      })
-      .then((response) => {
-        setReviews(response.data.results);
-      })
-      .catch((error) => {
-        console.error('Помилка отримання рецензій на фільм:', error);
-      });
-  };
 
   return (
     <div>
