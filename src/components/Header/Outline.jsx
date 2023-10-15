@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Outline = () => {
+const Outline = ({ children }) => {
   return (
-    <div className="outline">
-      <p>Це контент компонента Outline</p>
+    <div className='outline' tabIndex={0}>
+      {children}
     </div>
   );
 };
