@@ -1,39 +1,73 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const BASE_URL = 'https://api.themoviedb.org/3/movie/{movie_id}/credits';
+const BASE_URL = 'https://api.themoviedb.org/3/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
 
-function Reviews({ match }) {
-  const [reviews, setReviews] = useState([]);
-  const movieId = match.params.movieId;
+function Cast() {
+  const { movieId } = useParams();
+  const [cast, setCast] = useState([]);
+  const [movieDetails, setMovieDetails] = useState({});
+  const [movieImage, setMovieImage] = useState('');
 
   useEffect(() => {
+    // Отримуємо інформацію про акторів (каст)
     axios
-      .get(`${BASE_URL}/movie/${movieId}/reviews`, {
+      .get(`${BASE_URL}/${movieId}/credits`, {
         params: {
           api_key: API_KEY,
         },
       })
       .then((response) => {
-        setReviews(response.data.results);
+        setCast(response.data.cast);
       })
       .catch((error) => {
-        console.error('Помилка отримання оглядів фільму:', error);
+        console.error('Помилка отримання інформації про акторів:', error);
+      });
+
+    // Отримуємо інформацію про фільм для відображення деталей
+    axios
+      .get(`${BASE_URL}/${movieId}`, {
+        params: {
+          api_key: API_KEY,
+        },
+      })
+      .then((response) => {
+        setMovieDetails(response.data);
+        setMovieImage(`https://image.tmdb.org/t/p/w200/${response.data.poster_path}`);
+      })
+      .catch((error) => {
+        console.error('Помилка отримання інформації про фільм:', error);
       });
   }, [movieId]);
 
   return (
     <div>
-      <h2>Cast</h2>
-      <ul>
-        {reviews.map((review) => (
-          <li key={review.id} className=''>
-            <p>
-              <img src={`https://image.tmdb.org/t/p/w200/${review.author_details.avatar_path}`} alt={review.author} className="author-photo" />
-              {review.author}
-            </p>
-            <p>{review.content}</p>
+      <div>
+      <button className='go-back'><a href="/">go back</a></button>
+        <h1>{movieDetails.title}</h1>
+        <img src={movieImage} alt={movieDetails.title} className="img-det" />
+        <p className='p-rating'>Рейтинг: {movieDetails.vote_average}</p>
+        <p className="descri">Опис: {movieDetails.overview}</p>
+        <ul className='ul-button'>
+          <li className='li-button'>
+            <Link to={`/movies/${movieId}/cast`} className='button-load-cast'>Cast</Link>
+          </li>
+          <li className='li-button'>
+            <Link to={`/movies/${movieId}/reviews`} className='button-load-Reviews'>Reaviews</Link>
+          </li>
+        </ul>
+      </div>
+<div className='container-center'></div>
+      <h2 className='cast'>Cast</h2>
+      <ul className='ul-actor'>
+        {cast.map((actor) => (
+          <li key={actor.id} className='li-actor'>
+            <img src={`https://image.tmdb.org/t/p/w200/${actor.profile_path}`} alt={actor.name} className="actor-photo" />
+            <p className='p-actor'>{actor.name}</p>
+            <p>{actor.character}</p>
           </li>
         ))}
       </ul>
@@ -41,4 +75,4 @@ function Reviews({ match }) {
   );
 }
 
-export default Reviews;
+export default Cast;

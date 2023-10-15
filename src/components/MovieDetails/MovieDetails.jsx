@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
+
+const BASE_URL = 'https://api.themoviedb.org/3/movie';
+const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
 
 function MovieDetails() {
   const { movieId } = useParams();
@@ -11,22 +14,22 @@ function MovieDetails() {
 
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/${movieId}`, {
+      .get(`${BASE_URL}/${movieId}`, {
         params: {
-          api_key: '0faef55576804b8824855a6bbe4c2da0',
+          api_key: API_KEY,
         },
       })
       .then((response) => {
         setMovieDetails(response.data);
       })
       .catch((error) => {
-        console.error('Error getting movie details:', error);
+        console.error('Помилка отримання деталей фільму:', error);
       });
 
     axios
-      .get(`https://api.themoviedb.org/3/movie/${movieId}/images`, {
+      .get(`${BASE_URL}/${movieId}/images`, {
         params: {
-          api_key: '0faef55576804b8824855a6bbe4c2da0',
+          api_key: API_KEY,
         },
       })
       .then((response) => {
@@ -35,95 +38,55 @@ function MovieDetails() {
         }
       })
       .catch((error) => {
-        console.error('Error getting movie photo:', error);
+        console.error('Помилка отримання зображення фільму:', error);
       });
   }, [movieId]);
 
   const loadCast = () => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/${movieId}/credits`, {
+      .get(`${BASE_URL}/${movieId}/credits`, {
         params: {
-          api_key: '0faef55576804b8824855a6bbe4c2da0',
+          api_key: API_KEY,
         },
       })
       .then((response) => {
         setCast(response.data.cast);
       })
       .catch((error) => {
-        console.error('Error getting cast information:', error);
+        console.error('Помилка отримання інформації про акторів:', error);
       });
   };
 
   const loadReviews = () => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/${movieId}/reviews`, {
+      .get(`${BASE_URL}/${movieId}/reviews`, {
         params: {
-          api_key: '0faef55576804b8824855a6bbe4c2da0',
+          api_key: API_KEY,
         },
       })
       .then((response) => {
         setReviews(response.data.results);
       })
       .catch((error) => {
-        console.error('Error getting movie reviews:', error);
+        console.error('Помилка отримання рецензій на фільм:', error);
       });
-  };
-
-  const clearCast = () => {
-    setCast([]);
-  };
-
-  const clearReviews = () => {
-    setReviews([]);
   };
 
   return (
     <div>
+      <button className='go-back'><a href="/">go back</a></button>
       <h1>{movieDetails.title}</h1>
       <img src={movieImage} alt={movieDetails.title} className="img-det" />
-      <p className='p-rating'>Rating: {movieDetails.vote_average}</p>
-      <p className="descri">Description: {movieDetails.overview}</p>
+      <p className='p-rating'>Рейтинг: {movieDetails.vote_average}</p>
+      <p className="descri">Опис: {movieDetails.overview}</p>
       <ul className='ul-button'>
         <li className='li-button'>
-          <button onClick={loadCast} className='button-load-cast'>Load Cast</button>
-          {cast.length > 0 && (
-            <button onClick={clearCast} className='button-clear-cast'>Clear Cast</button>
-          )}
+          <Link to={`/movies/${movieId}/cast`} className='button-load-cast'>Cast</Link>
         </li>
         <li className='li-button'>
-          <button onClick={loadReviews} className='button-load-Reviews'>Load Reviews</button>
-          {reviews.length > 0 && (
-            <button onClick={clearReviews} className='button-clear-Reviews'>Clear Reviews</button>
-          )}
+          <Link to={`/movies/${movieId}/reviews`} className='button-load-Reviews'>Reaviews</Link>
         </li>
       </ul>
-      <div className=' container-center'>
-  <h2>Cast</h2>
-  <ul className='ul-actor'>
-    {cast.map((actor) => (
-      <li key={actor.id} className='li-actor'>
-         <img src={`https://image.tmdb.org/t/p/w200/${actor.profile_path}`} alt={actor.name} className="actor-photo" />
-        <p className='p-actor'>
-          {actor.name}
-        </p>
-        <p>{actor.character}</p>
-      </li>
-    ))}
-  </ul>
-</div>
-
-
-      <div className=' container-center'>
-        <h2>Reviews</h2>
-        <ul className='ul-reviews'>
-          {reviews.map((review) => (
-            <li key={review.id} className='li-reviews'>
-              <p>{review.author}</p>
-              <p>{review.content}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 }
