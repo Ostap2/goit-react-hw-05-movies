@@ -6,11 +6,13 @@ const Movies = lazy(() => import('./Movies/Movies'));
 const MovieDetails = lazy(() => import('./MovieDetails/MovieDetails'));
 const Cast = lazy(() => import('./Cast/Cast'));
 const Reviews = lazy(() => import('./Reviews/Reviews'));
+const Header = lazy(() => import('./Header/Header')); // Додайте імпорт Header
 
 function App() {
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
+        <Header /> {/* Додайте компонент Header тут */}
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path="/movies" element={<Movies />} />
