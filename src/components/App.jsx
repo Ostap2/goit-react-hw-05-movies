@@ -1,5 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 const Header = lazy(() => import('./Header/Header'));
 const Home = lazy(() => import('./Home/Home'));
@@ -10,7 +10,6 @@ const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 function App() {
   return (
-    <BrowserRouter>
     <div>
       <Suspense fallback={<div>Loading...</div>}>
         <Header />
@@ -24,7 +23,6 @@ function App() {
         </Routes>
       </Suspense>
     </div>
-    </BrowserRouter>
   );
 }
 
