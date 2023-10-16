@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
@@ -28,28 +29,30 @@ function Movies() {
     <div>
       <h1>Search movies</h1>
       <input
-  type="text"
-  id="searchInput" 
-  name="searchInput" 
-  placeholder="Enter a keyword"
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-/>
+        type="text"
+        id="searchInput"
+        name="searchInput"
+        placeholder="Enter a keyword"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
 
       <button onClick={handleSearch} className="button-search">
-      Search
+        Search
       </button>
       <ul className="list-films">
         {searchResults.map((movie) => (
           <li key={movie.id} className="item-films">
-            {movie.poster_path && (
-              <img
-                src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                alt={movie.title}
-                className="img-films"
-              />
-            )}
-            {movie.title}
+            <Link to={`/movies/${movie.id}`}>
+              {movie.poster_path && (
+                <img
+                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
+                  alt={movie.title}
+                  className="img-films"
+                />
+              )}
+              {movie.title}
+            </Link>
           </li>
         ))}
       </ul>
