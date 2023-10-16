@@ -44,7 +44,7 @@ function Reviews() {
   return (
     <div>
       <div>
-      <button className='go-back'><a href="/">go back</a></button>
+      <button className='go-back'><Link to="/">go back</Link></button>
         <h1>{movieDetails.title}</h1>
         <img src={movieImage} alt={movieDetails.title} className="img-det" />
         <p className='p-rating'>Рейтинг: {movieDetails.vote_average}</p>
