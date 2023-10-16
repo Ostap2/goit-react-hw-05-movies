@@ -43,21 +43,6 @@ function Reviews() {
 
   return (
     <div>
-      <div>
-      <button className='go-back'><Link to="/">go back</Link></button>
-        <h1>{movieDetails.title}</h1>
-        <img src={movieImage} alt={movieDetails.title} className="img-det" />
-        <p className='p-rating'>Рейтинг: {movieDetails.vote_average}</p>
-        <p className="descri">Опис: {movieDetails.overview}</p>
-        <ul className='ul-button'>
-          <li className='li-button'>
-            <Link to={`/movies/${movieId}/cast`} className='button-load-cast'>Cast</Link>
-          </li>
-          <li className='li-button'>
-            <Link to={`/movies/${movieId}/reviews`} className='button-load-Reviews'>Reaviews</Link>
-          </li>
-        </ul>
-      </div>
      <div className='container-center'>
       <h2>Reviews</h2>
       {reviews.length > 0 ? (

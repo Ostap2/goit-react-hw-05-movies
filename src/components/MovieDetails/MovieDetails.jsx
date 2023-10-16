@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
+import {Outlet, useParams, Link } from 'react-router-dom';
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
@@ -42,6 +42,7 @@ function MovieDetails() {
 
 
   return (
+    <>
     <div>
       <button className='go-back'><Link to="/">go back</Link></button>
       <h1>{movieDetails.title}</h1>
@@ -57,6 +58,13 @@ function MovieDetails() {
         </li>
       </ul>
     </div>
+  
+  <main>
+  <Suspense fallback={<div>Loading...</div>}>
+    <Outlet />
+  </Suspense>
+</main>
+</>
   );
 }
 
