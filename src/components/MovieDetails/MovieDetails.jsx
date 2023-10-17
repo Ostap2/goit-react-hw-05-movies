@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import axios from 'axios';
-import {Outlet, useParams, Link } from 'react-router-dom';
+import { Outlet, useParams, Link, useNavigate } from 'react-router-dom';
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
@@ -9,6 +9,7 @@ function MovieDetails() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const [movieImage, setMovieImage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -40,31 +41,29 @@ function MovieDetails() {
       });
   }, [movieId]);
 
-
   return (
     <>
-    <div>
-      <button className='go-back'><Link to="/">go back</Link></button>
-      <h1>{movieDetails.title}</h1>
-      <img src={movieImage} alt={movieDetails.title} className="img-det" />
-      <p className='p-rating'>Рейтинг: {movieDetails.vote_average}</p>
-      <p className="descri">Опис: {movieDetails.overview}</p>
-      <ul className='ul-button'>
-        <li className='li-button'>
-          <Link to={`/movies/${movieId}/cast`} className='button-load-cast'>Cast</Link>
-        </li>
-        <li className='li-button'>
-          <Link to={`/movies/${movieId}/reviews`} className='button-load-Reviews'>Reaviews</Link>
-        </li>
-      </ul>
-    </div>
-  
-  <main>
-  <Suspense fallback={<div>Loading...</div>}>
-    <Outlet />
-  </Suspense>
-</main>
-</>
+      <div>
+        <Link><button onClick={() => navigate(-1)} className="go-back">Go Back</button></Link>
+        <h1>{movieDetails.title}</h1>
+        <img src={movieImage} alt={movieDetails.title} className="img-det" />
+        <p className='p-rating'>Рейтинг: {movieDetails.vote_average}</p>
+        <p className="descri">Опис: {movieDetails.overview}</p>
+        <ul className='ul-button'>
+          <li className='li-button'>
+            <Link to={`/movies/${movieId}/cast`} className='button-load-cast'>Cast</Link>
+          </li>
+          <li className='li-button'>
+            <Link to={`/movies/${movieId}/reviews`} className='button-load-Reviews'>Reviews</Link>
+          </li>
+        </ul>
+      </div>
+      <main>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </main>
+    </>
   );
 }
 

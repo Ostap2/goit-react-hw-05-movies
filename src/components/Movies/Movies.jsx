@@ -25,21 +25,28 @@ function Movies() {
       });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
+    handleSearch(); 
+  };
+
   return (
     <div>
       <h1>Search movies</h1>
-      <input
-        type="text"
-        id="searchInput"
-        name="searchInput"
-        placeholder="Enter a keyword"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          id="searchInput"
+          name="searchInput"
+          placeholder="Enter a keyword"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
-      <button onClick={handleSearch} className="button-search">
-        Search
-      </button>
+        <button type="submit" className="button-search">
+          Search
+        </button>
+      </form>
       <ul className="list-films">
         {searchResults.map((movie) => (
           <li key={movie.id} className="item-films">
