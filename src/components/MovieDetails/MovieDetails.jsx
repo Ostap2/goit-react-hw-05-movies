@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, { useEffect, useState, Suspense, useRef } from 'react';
 import axios from 'axios';
 import { Outlet, useParams, Link, useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState({});
   const [movieImage, setMovieImage] = useState('');
   const navigate = useNavigate();
+  const navigateRef = useRef(); 
 
   useEffect(() => {
     axios
@@ -39,12 +40,16 @@ function MovieDetails() {
       .catch((error) => {
         console.error('Помилка отримання зображення фільму:', error);
       });
+
+    navigateRef.current = navigate;
   }, [movieId]);
 
   return (
     <>
       <div>
-        <Link><button onClick={() => navigate(-1)} className="go-back">Go Back</button></Link>
+        <Link to="/" state={{ navigateRef }}>
+          <button onClick={() => navigateRef.current(-1)} className="go-back">Go Back</button>
+        </Link>
         <h1>{movieDetails.title}</h1>
         <img src={movieImage} alt={movieDetails.title} className="img-det" />
         <p className='p-rating'>Рейтинг: {movieDetails.vote_average}</p>
