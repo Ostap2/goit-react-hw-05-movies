@@ -47,22 +47,7 @@ function Movies() {
           Search
         </button>
       </form>
-      <ul className="list-films">
-        {searchResults.map((movie) => (
-          <li key={movie.id} className="item-films">
-            <Link to={`/movies/${movie.id}`}>
-              {movie.poster_path && (
-                <img
-                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                  alt={movie.title}
-                  className="img-films"
-                />
-              )}
-              {movie.title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <MoviesList movies={popularMovies} />
     </div>
   );
 }

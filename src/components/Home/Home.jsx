@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useLocation } from "react-router-dom";
-
+import { MoviesList } from "../MoviesList";
 
 function Home() {
   const [popularMovies, setPopularMovies] = useState([]);
-  const location = useLocation();
   useEffect(() => {
     axios
       .get('https://api.themoviedb.org/3/trending/movie/day?language=en-US', {
@@ -24,22 +22,7 @@ function Home() {
   return (
     <div className='container-center'>
       <h1>Популярні фільми</h1>
-      <ul className='list-films'>
-  {popularMovies.map((movie) => (
-    <li key={movie.id} className='item-films'>
-<Link to={`/movies/${movie.id}`} state={{ from: location }}>
-               (
-                <img
-                  src={`https://image.tmdb.org/t/p/w200/${movie.poster_path}`}
-                  alt={movie.title}
-                  className="img-films"
-                />
-              )
-              {movie.title}
-            </Link>
-    </li>
-  ))}
-</ul>
+      <MoviesList movies={popularMovies} />
 
     </div>
   );

@@ -9,7 +9,7 @@ const root = document.getElementById('root');
 const reactRoot = createRoot(root);
 
 reactRoot.render(
-  <BrowserRouter basename='/goit-react-hw-05-movies'>
+  <BrowserRouter>
     <App />
   </BrowserRouter>
 );
