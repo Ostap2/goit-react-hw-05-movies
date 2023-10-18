@@ -9,8 +9,7 @@ function MovieDetails() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const [movieImage, setMovieImage] = useState('');
-  const navigate = useNavigate();
-  const navigateRef = useRef(); 
+
 
   useEffect(() => {
     axios
@@ -41,14 +40,13 @@ function MovieDetails() {
         console.error('Помилка отримання зображення фільму:', error);
       });
 
-    navigateRef.current = navigate;
   }, [movieId]);
 
   return (
     <>
       <div>
-        <Link to="/" state={{ navigateRef }}>
-          <button onClick={() => navigateRef.current(-1)} className="go-back">Go Back</button>
+        <Link to="/" >
+          <button  className="go-back">Go Back</button>
         </Link>
         <h1>{movieDetails.title}</h1>
         <img src={movieImage} alt={movieDetails.title} className="img-det" />
