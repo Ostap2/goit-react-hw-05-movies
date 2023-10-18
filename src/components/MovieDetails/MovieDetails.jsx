@@ -1,6 +1,6 @@
-import React, { useEffect, useState, Suspense, useRef } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import axios from 'axios';
-import { Outlet, useParams, Link, useNavigate } from 'react-router-dom';
+import { Outlet, useParams, Link } from 'react-router-dom';
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
