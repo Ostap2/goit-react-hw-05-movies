@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import MoviesList from '../MoviesList'; 
+import { MoviesList } from "../MoviesList";
 
 const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
