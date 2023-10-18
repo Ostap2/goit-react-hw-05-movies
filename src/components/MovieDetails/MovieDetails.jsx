@@ -10,7 +10,7 @@ function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState({});
   const [movieImage, setMovieImage] = useState('');
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/products";
+  const backLinkHref = location.state?.from ?? "/";
 
   useEffect(() => {
     axios
