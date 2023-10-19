@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { MoviesList } from "../MoviesList";
+import { MoviesList } from '../MoviesList';
+import { useSearchParams } from 'react-router-dom';
 
 const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
@@ -8,29 +9,28 @@ const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
 function Movies() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    const query = searchParams.get('query');
 
-    const savedResults = localStorage.getItem('searchResults');
-    if (savedResults) {
-      setSearchResults(JSON.parse(savedResults));
+    if (query) {
+      setSearchTerm(query);
+      handleSearch(query);
     }
-  }, []);
+  }, [searchParams]);
 
-  const handleSearch = () => {
+  const handleSearch = (query) => {
     axios
       .get(BASE_URL, {
         params: {
           api_key: API_KEY,
-          query: searchTerm,
+          query: query,
         },
       })
       .then((response) => {
         const results = response.data.results;
         setSearchResults(results);
-
-
-        localStorage.setItem('searchResults', JSON.stringify(results));
       })
       .catch((error) => {
         console.error('Помилка під час пошуку фільмів:', error);
@@ -38,8 +38,11 @@ function Movies() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSearch();
+    e.preventDefault(); 
+
+    const newQuery = encodeURIComponent(searchTerm);
+    setSearchParams({ query: newQuery });
+    handleSearch(searchTerm);
   };
 
   return (
