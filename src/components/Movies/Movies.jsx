@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MoviesList } from '../MoviesList';
-import { useSearchParams } from 'react-router-dom';
 
 const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
@@ -9,16 +8,15 @@ const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
 function Movies() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    const query = searchParams.get('query');
+    const query = new URLSearchParams(window.location.search).get('query');
 
     if (query) {
       setSearchTerm(query);
       handleSearch(query);
     }
-  }, [searchParams]);
+  }, []);
 
   const handleSearch = (query) => {
     axios
@@ -35,13 +33,15 @@ function Movies() {
       .catch((error) => {
         console.error('Помилка під час пошуку фільмів:', error);
       });
+
+    // Оновіть URL з новим пошуковим запитом
+    window.history.pushState(null, '', `/movies?query=${encodeURIComponent(query)}`);
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
 
     const newQuery = encodeURIComponent(searchTerm);
-    setSearchParams({ query: newQuery });
     handleSearch(searchTerm);
   };
 
