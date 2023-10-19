@@ -1,4 +1,5 @@
-import React, { useEffect, useState, Suspense } from 'react';
+
+import React, { useEffect, useState, Suspense, useRef } from 'react';
 import axios from 'axios';
 import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
 
@@ -10,7 +11,8 @@ function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState({});
   const [movieImage, setMovieImage] = useState('');
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? "/";
+  const backLinkHref = useRef(location.state?.from ?? "/");
+
 
   useEffect(() => {
     axios
@@ -46,7 +48,7 @@ function MovieDetails() {
   return (
     <>
       <div>
-        <Link to={backLinkHref} >
+      <Link to={backLinkHref.current} >
           <button  className="go-back">Go Back</button>
         </Link>
         <h1>{movieDetails.title}</h1>
