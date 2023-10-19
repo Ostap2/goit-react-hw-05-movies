@@ -10,11 +10,11 @@ function Movies() {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const query = new URLSearchParams(window.location.search).get('query');
 
-    if (query) {
-      setSearchTerm(query);
-      handleSearch(query);
+    const lastQuery = localStorage.getItem('lastQuery');
+    if (lastQuery) {
+      setSearchTerm(lastQuery);
+      handleSearch(lastQuery);
     }
   }, []);
 
@@ -29,19 +29,20 @@ function Movies() {
       .then((response) => {
         const results = response.data.results;
         setSearchResults(results);
+
+
+        localStorage.setItem('lastQuery', query);
       })
       .catch((error) => {
         console.error('Помилка під час пошуку фільмів:', error);
       });
 
-    // Оновіть URL з новим пошуковим запитом
+
     window.history.pushState(null, '', `/movies?query=${encodeURIComponent(query)}`);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const newQuery = encodeURIComponent(searchTerm);
     handleSearch(searchTerm);
   };
 
