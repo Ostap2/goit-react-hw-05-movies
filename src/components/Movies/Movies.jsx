@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MoviesList } from "../MoviesList";
 
@@ -9,6 +9,14 @@ function Movies() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
+  useEffect(() => {
+
+    const savedResults = localStorage.getItem('searchResults');
+    if (savedResults) {
+      setSearchResults(JSON.parse(savedResults));
+    }
+  }, []);
+
   const handleSearch = () => {
     axios
       .get(BASE_URL, {
@@ -18,7 +26,11 @@ function Movies() {
         },
       })
       .then((response) => {
-        setSearchResults(response.data.results);
+        const results = response.data.results;
+        setSearchResults(results);
+
+
+        localStorage.setItem('searchResults', JSON.stringify(results));
       })
       .catch((error) => {
         console.error('Помилка під час пошуку фільмів:', error);
@@ -47,7 +59,7 @@ function Movies() {
           Search
         </button>
       </form>
-      <MoviesList movies={searchResults} /> 
+      <MoviesList movies={searchResults} />
     </div>
   );
 }
