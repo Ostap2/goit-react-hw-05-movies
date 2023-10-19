@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, Suspense, useRef } from 'react';
 import axios from 'axios';
 import { Outlet, useParams, Link, useLocation } from 'react-router-dom';
@@ -12,7 +11,6 @@ function MovieDetails() {
   const [movieImage, setMovieImage] = useState('');
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? "/");
-
 
   useEffect(() => {
     axios
