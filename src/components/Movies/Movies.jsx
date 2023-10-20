@@ -10,11 +10,12 @@ function Movies() {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const query = urlParams.get('query');
 
-    const lastQuery = localStorage.getItem('lastQuery');
-    if (lastQuery) {
-      setSearchTerm(lastQuery);
-      handleSearch(lastQuery);
+    if (query) {
+      setSearchTerm(query);
+      handleSearch(query);
     }
   }, []);
 
@@ -29,8 +30,6 @@ function Movies() {
       .then((response) => {
         const results = response.data.results;
         setSearchResults(results);
-
-
         localStorage.setItem('lastQuery', query);
       })
       .catch((error) => {
