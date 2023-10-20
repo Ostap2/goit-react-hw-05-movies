@@ -15,14 +15,9 @@ function Movies() {
   useEffect(() => {
     const query = searchParams.get('query');
 
-    if (query) {
-      setSearchTerm(query);
-      handleSearch(query);
-    }
-  }, [searchParams]);
+    if (!query)return; 
 
-  const handleSearch = (query) => {
-    axios
+  axios
       .get(BASE_URL, {
         params: {
           api_key: API_KEY,
@@ -37,13 +32,14 @@ function Movies() {
         console.error('Error while searching for movies:', error);
       });
 
+  }, [searchParams]);
 
-    setSearchParams({ query: query });
-  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleSearch(searchTerm);
+if(!searchTerm){alert('write text');return}
+    setSearchParams({ query: searchTerm });
   };
 
   return (
