@@ -46,8 +46,8 @@ function MovieDetails() {
   return (
     <>
       <div>
-      <Link to={backLinkHref.current} >
-          <button  className="go-back">Go Back</button>
+      <Link to={backLinkHref.current} className="go-back">
+          Go Back
         </Link>
         <h1>{movieDetails.title}</h1>
         <img src={movieImage} alt={movieDetails.title} className="img-det" />

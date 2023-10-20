@@ -246,6 +246,9 @@ h2 {
   width: 160px;
   height: 35px;
   transition: 1s;
+  position: relative;
   margin-left: 14px;
-  margin-top: 20px;
+ top: 25px;
+  padding: 5px
+  
 }
