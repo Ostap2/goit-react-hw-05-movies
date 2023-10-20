@@ -34,14 +34,14 @@ function Movies() {
       .catch((error) => {
         console.error('Помилка під час пошуку фільмів:', error);
       });
+
+    // Оновлення URL без перезавантаження сторінки
+    window.history.pushState(null, '', `/movies?query=${encodeURIComponent(query)}`);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSearch(searchTerm);
-    
-    // Оновлення URL без перезавантаження сторінки
-    window.history.pushState(null, '', `/movies?query=${encodeURIComponent(searchTerm)}`);
   };
 
   return (
