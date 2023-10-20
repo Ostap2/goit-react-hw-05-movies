@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MoviesList } from '../MoviesList';
-import { useSearchParams } from 'react-router-dom'; // Import the useSearchParams hook
+import { useSearchParams } from 'react-router-dom'; 
 
 const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
 const API_KEY = '0faef55576804b8824855a6bbe4c2da0';
@@ -10,7 +10,7 @@ function Movies() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-  const [searchParams, setSearchParams] = useSearchParams(); // Initialize the searchParams with the URL search parameters
+  const [searchParams, setSearchParams] = useSearchParams(); 
 
   useEffect(() => {
     const query = searchParams.get('query');
@@ -37,7 +37,7 @@ function Movies() {
         console.error('Error while searching for movies:', error);
       });
 
-    // Update URL without page reload using the setSearchParams function
+
     setSearchParams({ query: query });
   };
 
